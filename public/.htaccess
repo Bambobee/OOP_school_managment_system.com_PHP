@@ -1,0 +1,7 @@
+#this redirects the uRL to index.php page no matter what the user types in the website
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
