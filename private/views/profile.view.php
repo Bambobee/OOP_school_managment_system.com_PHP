@@ -48,26 +48,47 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Basic Infor</a>
+                <a class="nav-link <?=$page_tab=='info' ? 'active' : '' ?>" aria-current="page" href="<?=ROOT ?>/profile/<?=$row->user_id?>">Basic Infor</a>
             </li>
+           <?php if(Auth::access('lecturer') || Auth::i_own_content($row)): ?>
             <li class="nav-item">
-                <a class="nav-link" href="#">Classes </a>
+                <a class="nav-link <?=$page_tab=='classes' ? 'active' : '' ?>" href="<?=ROOT ?>/profile/<?=$row->user_id?>?tab=classes">Classes </a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="#">Test</a>
+                <a class="nav-link <?=$page_tab=='tests' ? 'active' : '' ?>" href="<?=ROOT ?>/profile/<?=$row->user_id?>?tab=tests">Test</a>
             </li>
+            <?php endif; ?>
+            
         </ul>
 
-        <nav class="navbar navbar-light bg-light">
-          <form action="" class="form-inline">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-              </div>
-              <input type="text" class="form-control" placeholder="search" aria-label="Search">
-            </div>
-          </form>
-        </nav>
+        <?php
+
+        switch ($page_tab){
+            case 'info':
+                include(views_path('profile-tab-info'));
+                break;
+            case 'classes':
+                if(Auth::access('lecturer') || Auth::i_own_content($row)){
+                    include(views_path('profile-tab-classes'));
+                }else{
+                    include(views_path('access_denied'));
+                }
+                
+                break;
+            case 'tests':
+                if(Auth::access('lecturer') || Auth::i_own_content($row)){
+                include(views_path('profile-tab-test'));
+            }else{
+                include(views_path('access_denied'));
+            }
+                break;
+                
+            default:
+                break;    
+        }
+        ?>
+        
     </div>
  <?php else:?>
  <center> <h4>That Profile was not found.</h4></center>

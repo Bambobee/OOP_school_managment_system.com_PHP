@@ -11,8 +11,39 @@ class Classes extends Controller{
             $this->redirect('login');
         }
         $classes = new Classes_model();
+        $school_id = Auth::getSchool_id();
 
-        $data = $classes->findAll();
+        if(Auth::access('admin')){
+
+            $query = "Select * from classes where school_id = :school_id order by id desc";
+            $arr['school_id'] = $school_id;
+            if(isset($_GET['find'])){
+                $find = '%' . $_GET['find'] . '%';
+                $query = "Select * from classes where school_id = :school_id && (class like :find) order by id desc ";
+                $arr['find'] = $find;
+            }
+
+            $data = $classes->query($query, $arr);
+        }else{
+
+        $class = new Classes_model;
+        $mytable = "class_students";
+
+        if(Auth::getRank() == "lecturer"){
+            $mytable = "class_lecturers";
+        }
+
+        $query = "select * from $mytable where user_id = :user_id && disabled = 0";
+        $arr['stud_classes'] = $class->query($query,['user_id'=>Auth::getUser_id() ]);
+
+        $data = [];
+        if($arr['stud_classes']){
+            foreach($arr['stud_classes'] as $key => $value){
+                $data[] = $class->first('class_id',$value->class_id);
+            }
+        }
+        }
+        
 
         $crumbs[] = ['Dashboard',''];
         $crumbs[] = ['Classes','Classes'];
@@ -59,7 +90,7 @@ class Classes extends Controller{
         $classes = new Classes_model();
         $errors = [];
 
-        if(count($_POST) > 0){
+        if(count($_POST) > 0 && Auth::access('lecturer') && Auth::i_own_content($row)){
            
             if($classes->validate($_POST)){
 
@@ -76,11 +107,15 @@ class Classes extends Controller{
        $crumbs[] = ['Classes','classes'];
        $crumbs[] = ['Edit','classes/edit'];
 
+       if(Auth::access('lecturer') && Auth::i_own_content($row)){
         $this->view('classes.edit', [
             'row' => $row,
             'errors' => $errors,
             'crumbs' => $crumbs
         ]);
+    }else{
+        $this->view('access-denied');
+       }
     }
 
     public function delete($id = null){
@@ -91,7 +126,7 @@ class Classes extends Controller{
         $classes = new Classes_model();
         $errors = [];
 
-        if(count($_POST) > 0){
+        if(count($_POST) > 0 && Auth::access('lecturer') && Auth::i_own_content($row)){
            
 
                 $classes->delete($id);
@@ -105,9 +140,14 @@ class Classes extends Controller{
        $crumbs[] = ['Classes','classes'];
        $crumbs[] = ['Delete','classes/delete'];
        
+       if(Auth::access('lecturer') && Auth::i_own_content($row)){
         $this->view('classes.delete', [
             'row' => $row,
             'crumbs' => $crumbs
         ]);
+       }else{
+        $this->view('access-denied');
+       }
+        
     }
 }

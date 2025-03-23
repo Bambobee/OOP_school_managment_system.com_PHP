@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2025 at 02:16 PM
+-- Generation Time: Mar 23, 2025 at 02:29 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -151,10 +151,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `date`, `user_id`, `gender`, `school_id`, `rank`, `password`, `image`) VALUES
-(1, 'Zia', 'Guthrie', 'dafifokyq@mailinator.com', '2025-02-17', 'eGWJaL9e42i8zw0eb2zz0ZyKZCL7lA4Y0wy3n5VbNk5fPdGKjl1tfshxLRe', 'male', 'SkssWWCsvPRyQQxE2nrwuY4GUdnyraJ4aWEilQKOCosgI1yLRMgeWv3Baz', 'super_admin', '$2y$10$LT87Rf.fsKMjmRAQRFrGD.OUlALJYu8jqgadShgPdE7C0TSXUlbyC', ''),
-(2, 'Joelle', 'Terrell', 'fodyhowot@mailinator.com', '2025-02-19', '8i3u7wHlLWgnOSZgmQ8wSaZF1Zh3TDtWxBf3EefcDwrydgCCBdgyx2PAAoz', 'female', '', 'super_admin', '$2y$10$h6T0j3vYmN7zaVUiE2zU3esS.Sq2r9EPQ.0JVyIttr1oWM1fFdr2e', ''),
-(3, 'Briar', 'Acevedo', 'ripudehic@mailinator.com', '2025-02-22', 'HnjZzuiCVqvOXISgVCLywwf7GWH2jn1lEbVwqZWy7ByeBDbox3xnkvw7YYa', 'female', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'lecturer', '$2y$10$4.TwMf987sITqgvjGHv97OdJQ6xBubUSiuU/Fdj4rUJzGe1fVyacC', ''),
-(4, 'Allen', 'Watts', 'xofihyr@mailinator.com', '2025-02-23', 'jafTxIY53kukDvqdtf9IkGMKrFdo6tJhezgK4VG1s3SoYLyDxjEcLcQ1Y8', 'female', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'student', '$2y$10$NnlCQSip.NTZhGW1S..Ha.Fpor6FUfRa6NGB89n/1FPcL9A32X8Dy', ''),
+(1, 'Zia', 'Guthrie', 'dafifokyq@mailinator.com', '2025-02-17', 'eGWJaL9e42i8zw0eb2zz0ZyKZCL7lA4Y0wy3n5VbNk5fPdGKjl1tfshxLRe', 'male', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'super_admin', '$2y$10$LT87Rf.fsKMjmRAQRFrGD.OUlALJYu8jqgadShgPdE7C0TSXUlbyC', ''),
+(2, 'Joelle', 'Terrell', 'fodyhowot@mailinator.com', '2025-02-19', '8i3u7wHlLWgnOSZgmQ8wSaZF1Zh3TDtWxBf3EefcDwrydgCCBdgyx2PAAoz', 'female', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgB...', 'lecturer', '$2y$10$E1OcQLUpbBZsi5OU80IEIuSxd959yJ0Sj8WubgVGe29rgOLsdedR.', ''),
+(3, 'Briar', 'Acevedo', 'ripudehic@mailinator.com', '2025-02-22', 'HnjZzuiCVqvOXISgVCLywwf7GWH2jn1lEbVwqZWy7ByeBDbox3xnkvw7YYa', 'female', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'reception', '$2y$10$XBnInwYLT30HL8gfyocm.uIA09oZL.bG1iBYRqXFvNxxEPRk3pMV6', ''),
+(4, 'Allen', 'Watts', 'xofihyr@mailinator.com', '2025-02-23', 'jafTxIY53kukDvqdtf9IkGMKrFdo6tJhezgK4VG1s3SoYLyDxjEcLcQ1Y8', 'female', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'student', '$2y$10$sej1dno1peVBgnuCTjuNmOUJnG9EYFmyrb84ON/p4kV3LtSp7q7VC', ''),
 (5, 'Felix', 'Hogan', 'qywuj@mailinator.com', '2025-02-23', 'a98rz6sBQXrh1McARu2UcqxhF61Et00JyIedIW1D9Sg9Aryh6okIaNSYozq', 'male', '3XqhudGuP5obX6aJRY2ZrNrT4y0DuZ5brOutmFwfe1aAR4iBgBqrd41DuS9M', 'student', '$2y$10$S5Heguv3PZE4ZhGgx9m8P.kEn45v/A36GDdLvLSsC5Rhd9uG1o3PG', '');
 
 --

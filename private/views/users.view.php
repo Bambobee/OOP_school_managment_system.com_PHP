@@ -8,8 +8,8 @@
         <form class="form-inline">
             <div class="input-group">
                 <div class="input-group">
-                    <span class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></span>
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                    <button class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></button>
+                    <input type="text"  value="<?=isset($_GET['find'])?$_GET['find']:'';?>" name="find" class="form-control" placeholder="Search" aria-label="Search"
                         aria-describedby="basic-addon1">
                 </div>
             </div>
