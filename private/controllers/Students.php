@@ -13,7 +13,12 @@ class Students extends Controller
         }
         $user = new User();
         $school_id = Auth::getSchool_id(); 
-        $query = "Select * from users where school_id = :school_id  && rank in ('student') order by id desc ";
+
+        $limit = 10;
+        $pager = new Pager($limit);
+        $offset = $pager->offset;
+
+        $query = "Select * from users where school_id = :school_id  && rank in ('student') order by id desc limit $limit offset $offset";
         $arr['school_id'] = $school_id;
             if(isset($_GET['find'])){
                 $find = '%' . $_GET['find'] . '%';
@@ -26,7 +31,7 @@ class Students extends Controller
         $crumbs[] = ['students','students'];
 
         if(Auth::access('reception')){
-                $this->view('students', ['rows' => $data, 'crumbs'=>$crumbs]);    
+                $this->view('students', ['rows' => $data, 'crumbs'=>$crumbs , 'pager'=>$pager]);    
             }else{
                 $this->view('access-denied');   
             }

@@ -34,7 +34,15 @@ class Classes extends Controller{
         }
 
         $query = "select * from $mytable where user_id = :user_id && disabled = 0";
-        $arr['stud_classes'] = $class->query($query,['user_id'=>Auth::getUser_id() ]);
+       
+        $arr['user_id'] = Auth::getUser_id();
+        if(isset($_GET['find'])){
+            $find = '%' . $_GET['find'] . '%';
+            $query = "select classes.class, {$mytable}.* from $mytable join classes on classes.class_id = {$mytable}.class_id where {$mytable}.user_id = :user_id && {$mytable}.disabled = 0 && classes.class like :find";
+            $arr['find'] = $find;
+        }
+
+        $arr['stud_classes'] = $class->query($query,$arr);
 
         $data = [];
         if($arr['stud_classes']){

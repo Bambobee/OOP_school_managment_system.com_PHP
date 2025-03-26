@@ -9,8 +9,8 @@
             <div class="input-group">
                 <div class="input-group">
                     <button class="input-group-text" id="basic-addon1"><i class="fa fa-search"></i></button>
-                    <input type="text" value="<?=isset($_GET['find'])?$_GET['find']:'';?>" name="find" class="form-control" placeholder="Search" aria-label="Search"
-                        aria-describedby="basic-addon1">
+                    <input type="text" value="<?=isset($_GET['find'])?$_GET['find']:'';?>" name="find"
+                        class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
                 </div>
             </div>
         </form>
@@ -33,7 +33,9 @@
         </h4>
 
         <?php endif;?>
-    </div>
+</div>
+<?php $pager->display() ?>
+
 </div>
 
 
