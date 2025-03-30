@@ -62,13 +62,40 @@ class Profile extends Controller{
         if(!Auth::logged_in()){
             $this->redirect('login');
         }
-        
+        $errors = [];
         $user = new User();
         $id = trim($id == '') ? Auth::getUser_id() : $id;
+
+        if(count($_POST) > 0 && Auth::access('reception')){
+            //something was posted 
+            // show($_POST);
+            //check if password exits
+            if(trim($_POST['password']) == ""){
+                unset($_POST['password']);
+                unset($_POST['password2']);
+            }
+
+            if($user->validate($_POST,$id)){
+                 
+                if($_POST['rank'] == 'super_admin' && $_SESSION['USER']->rank != "super_admin"){
+                    $_POST['rank'] = 'admin';
+                }
+               $myrow = $user->first('user_id',$id);
+               if(is_object($myrow)){
+                $user->update($myrow->id,$_POST);
+               }
+                
+                $redirect = 'profile/edit/'.$id;
+                $this->redirect($redirect);
+            }else{
+                //errors
+                $errors = $user->errors;
+            }
+        }
         $row = $user->first('user_id',$id);
 
         $data['row'] = $row;
-        
+        $data['errors'] = $errors;
        if(Auth::access('reception') || Auth::i_own_content($row)){
         echo $this->view('profile-edit',$data);
        }else{

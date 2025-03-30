@@ -20,9 +20,10 @@ class User extends Model{
     'make_school_id',
     'hash_password'];
 
- 
+    protected $beforeUpdate = [
+      'hash_password',];
 
-  public function validate($DATA){
+  public function validate($DATA,$id = ''){
 
     $this->errors = [];
     //check for first name
@@ -38,9 +39,15 @@ class User extends Model{
         $this->errors['email'] = "Email is not valid";
     }
      //check if email exists
-     if($this->where('email',$DATA['email'])){
-      $this->errors['email'] = "That email is already in use.";
-  }
+     if(trim($id) == ""){
+      if($this->where('email',$DATA['email'])){
+        $this->errors['email'] = "That email is already in use.";
+     }else{
+      if($this->query('select email from $this->table where email = :email && user_id != :id',['email'=>$DATA['email'],'id'=>$id])){
+        $this->errors['email'] = "That email is already in use.";
+     }}
+     
+     }
       //check for gender
       $genders = ['female','male'];
       if(empty($DATA['gender']) || !in_array($DATA['gender'], $genders)){
@@ -52,13 +59,16 @@ class User extends Model{
         $this->errors['rank'] = "Rank is not valid";
     }
     //check for password
-    if(empty($DATA['password']) || $DATA['password'] != $DATA['password2']){
+    if(isset($DATA['password'])){
+      if(empty($DATA['password']) || $DATA['password'] != $DATA['password2']){
         $this->errors['password'] = "The password do not match";
     }
     if(strlen($DATA['password']) < 8){
       $this->errors['password'] = "Password must be atleast 8 characters long ";
   }
 
+    }
+  
     if(count($this->errors) == 0){
         return true;
     }
@@ -87,7 +97,10 @@ class User extends Model{
   }
 
   public function hash_password($data){
-    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+    if(isset($data['password'])){
+      $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+    }
+    
     return $data;
   }
     
