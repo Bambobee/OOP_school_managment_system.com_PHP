@@ -57,4 +57,23 @@ class Profile extends Controller{
        }
         
     }
+    function edit($id = ''){
+
+        if(!Auth::logged_in()){
+            $this->redirect('login');
+        }
+        
+        $user = new User();
+        $id = trim($id == '') ? Auth::getUser_id() : $id;
+        $row = $user->first('user_id',$id);
+
+        $data['row'] = $row;
+        
+       if(Auth::access('reception') || Auth::i_own_content($row)){
+        echo $this->view('profile-edit',$data);
+       }else{
+        echo $this->view('access-denied');
+       }
+        
+    }
 }

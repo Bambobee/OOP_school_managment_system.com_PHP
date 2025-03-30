@@ -3,7 +3,7 @@
 
 
 <div class="container-fluid p-3 shadow mx-auto" style="max-width: 1000px">
-    <?php $this->view('includes/crumbs',['crumbs' => $crumbs]) ?>
+ <center><h4>Edit Profile</h4></center>
     <?php
                 $image = get_image($row->image,$row->gender );
                

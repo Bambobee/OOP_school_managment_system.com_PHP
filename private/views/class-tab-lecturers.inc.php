@@ -30,6 +30,7 @@
                 $row = $lecturer->user;
                 include(views_path('user')) ?>    
             <?php endforeach; ?>
+           
         <?php else: ?>
         <center>
             <h4>No lecturers were found in this class</h4>
@@ -37,4 +38,5 @@
         <?php endif; ?>
         
         </div>
+        <?php $pager->display() ?>
        
