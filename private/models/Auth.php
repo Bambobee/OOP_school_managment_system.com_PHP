@@ -48,11 +48,13 @@
         $user = new User();
         $school = new School();
        
+       
         if( $row = $school->where('id',$id)){
             $row = $row[0]; 
             $arr['school_id'] = $row->school_id;
 
-            $user->update($_SESSION['USER']->id,$arr);
+            // show($user->update($_SESSION['USER']->id,$arr));die;
+            $user->update_column($_SESSION['USER']->id,$arr);
             $_SESSION['USER']->school_id = $row->school_id;
             $_SESSION['USER']->school_name = $row->school;
         }

@@ -51,7 +51,10 @@ function esc($var){
       if($gender == 'male'){
           $image = ASSETS . '/img/user_male.jpg';
       }
-  }
+     
+  } else{
+    $image =  ROOT . "/" . $image;
+   }
 
   return $image;
   }

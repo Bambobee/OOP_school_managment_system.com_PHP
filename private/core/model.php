@@ -14,6 +14,7 @@ class Model extends Database{
     }
 
     public function where($column,$value,$orderby = 'desc'){
+        // show($this->table);die;
         $column = addslashes($column);
         $query = "select * from $this->table where $column = :value order by id $orderby ";
         $data = $this->query($query,[
@@ -79,6 +80,7 @@ class Model extends Database{
     }
 
     public function update($id,$data){
+        
             // remove unwanted columns
             if(property_exists($this, 'allowedColumns'))
             {
@@ -106,6 +108,19 @@ class Model extends Database{
         return $this->query($query,$data);
         
     }
+    public function update_column($id,$data){
+    
+    
+    $str = "";
+    foreach($data as $key => $value){
+        $str.= "$key = :$key,";
+    }
+    $str = trim($str,',');
+    $data['id'] = $id;
+    $query = "update $this->table set $str where id = :id";
+    return $this->query($query,$data);
+    
+}
 
     public function delete($id){
     

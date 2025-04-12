@@ -6,6 +6,7 @@
 
 class School extends Model{
 
+  
   protected $allowedColumns = [
     'school',
     'date'];

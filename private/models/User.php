@@ -5,7 +5,8 @@
 */
 
 class User extends Model{
-
+  
+  // protected $table = 'users';
   protected $allowedColumns = [
     'firstname'
     ,'lastname'
@@ -13,7 +14,9 @@ class User extends Model{
     'gender',
     'rank',
     'password',
-  'date'];
+    'date',
+    'image'
+];
 
   protected $beforeInsert = [
     'make_user_id',
