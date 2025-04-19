@@ -53,7 +53,9 @@ function esc($var){
       }
      
   } else{
-    $image =  ROOT . "/" . $image;
+
+    $crop = new Image();
+    $image =  ROOT . "/" . $crop->profile_thumb($image);
    }
 
   return $image;
