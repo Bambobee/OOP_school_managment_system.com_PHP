@@ -8,4 +8,12 @@
     <link rel="stylesheet" type="text/css" href="<?= ASSETS; ?>/all.min.css" />
 </head>
 <body>
+    <style>
+        .fa{
+            margin-right: 4px;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
     <div style="min-width: 350px;">
